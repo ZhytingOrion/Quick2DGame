@@ -18,6 +18,7 @@ public class ButtonBasic : MonoBehaviour {
         {
             highLight = hl.gameObject;
             highLight.SetActive(false);
+            
         }
 	}
 
