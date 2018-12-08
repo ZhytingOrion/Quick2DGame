@@ -32,10 +32,11 @@ public class GS_Statue : MonoBehaviour {
         currentPos.z = pos.z;
         this.transform.position = currentPos;
 
-        if (!IsGrounded())
+        /*if (!IsGrounded())
         {
             this.transform.Translate(new Vector3(0, 0.5f * acc * Time.deltaTime,0));
-        }
+        }*/
+        
     }
 
     public void statueInit(RoleState state)
@@ -43,7 +44,7 @@ public class GS_Statue : MonoBehaviour {
         this.statueState = state;
         statueInfo = GameObject.Find("_Init").GetComponent<GS_GameInit>().statueInfosDic[statueState];
         this.transform.Find("statueSprite").GetComponent<SpriteRenderer>().sprite = statueInfo.statueTex;
-        this.GetComponent<BoxCollider>().size = new Vector3(statueInfo.statueSize.x, statueInfo.statueSize.y, 10.0f);
+        this.GetComponent<BoxCollider>().size = new Vector3(statueInfo.statueSize.x, statueInfo.statueSize.y, 0.2f);
         //this.GetComponent<Rigidbody2D>().mass = statueInfo.statueMass;
     }
 
@@ -54,6 +55,17 @@ public class GS_Statue : MonoBehaviour {
             Debug.Log("找到雕塑了!");
             //让灵体激活该雕像
             collision.gameObject.GetComponent<PlayerBasic>().GetIntoStatue(this.statueState, this.gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (IsGrounded())
+        {
+            if (this.GetComponent<Rigidbody>() != null)
+            {
+                Destroy(this.GetComponent<Rigidbody>());
+            }
         }
     }
 

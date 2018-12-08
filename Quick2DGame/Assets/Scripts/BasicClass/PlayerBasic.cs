@@ -8,6 +8,7 @@ public enum RoleState
     Mouse,
     Robbit,
     Dog,
+    Tortoise,
     Soul,
 }
 
@@ -86,25 +87,25 @@ public class PlayerBasic : MonoBehaviour {
         }*/
         if (Input.GetKey(leftKey))
         {
+            this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
             body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
-            switch (this.roleState)
-            {
-                case RoleState.Robbit:
-                    if (IsGrounded() && !this.isJump)
-                    {
-                        this.transform.position += new Vector3(0, 0.02f, 0);
-                        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
-                        this.isJump = true;
-                    }
-                    else
-                    {
-                        this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
-                    }
-                    break;
-                default:
-                    this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
-                    break;
-            }
+            //switch (this.roleState)
+            //{
+            //    case RoleState.Robbit:
+            //        if (IsGrounded() && !this.isJump)
+            //        {
+            //            this.transform.position += new Vector3(0, 0.02f, 0);
+            //            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
+            //            this.isJump = true;
+            //        }
+            //        else
+            //        {
+            //        }
+            //        break;
+            //    default:
+            //        this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+            //        break;
+            //}
             if (!this.isLeft)
             {
                 this.body.transform.Rotate(new Vector3(0, 1, 0), 180);
@@ -113,25 +114,26 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(rightKey))
         {
+            this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
             body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
-            switch (this.roleState)
-            {
-                case RoleState.Robbit:
-                    if (IsGrounded())
-                    {
-                        this.transform.position += new Vector3(0, 0.02f, 0);
-                        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
-                        this.isJump = true;
-                    }
-                    else
-                    {
-                        this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
-                    }
-                    break;
-                default:
-                    this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
-                    break;
-            }
+            //switch (this.roleState)
+            //{
+            //    case RoleState.Robbit:
+            //        if (IsGrounded())
+            //        {
+            //            this.transform.position += new Vector3(0, 0.02f, 0);
+            //            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
+            //            this.isJump = true;
+            //        }
+            //        else
+            //        {
+            //            this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+            //        }
+            //        break;
+            //    default:
+            //        this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+            //        break;
+            //}
             if (this.isLeft)
             {
                 this.body.transform.Rotate(new Vector3(0, 1, 0), 180);
@@ -141,11 +143,11 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(upKey))
         {
-            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
                     this.transform.position += new Vector3(0, 1, 0) * roleInfo.moveSpeedY * Time.deltaTime;
+                    body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
                     break;
                 default:
                     break;
@@ -153,20 +155,19 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(downKey))
         {
-            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
                     this.transform.position += new Vector3(0, -1, 0) * roleInfo.moveSpeedY * Time.deltaTime;
+                    body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
                     break;
                 default:
                     break;
             }
         }
 
-        if (Input.GetKeyDown(jumpKey) && IsGrounded() && !isJump)
+        if (Input.GetKeyDown(jumpKey) && !isJump)
         {
-            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Jump, false, false, false);
             switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
@@ -175,6 +176,7 @@ public class PlayerBasic : MonoBehaviour {
                     //this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, roleInfo.jumpForce));
                     this.transform.position += new Vector3(0, 0.1f, 0);
                     this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce,0));
+                    body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Jump, false, false, false);
                     jumpTime -= 1;
                     if (jumpTime == 0) isJump = true;
                     break;
@@ -184,6 +186,12 @@ public class PlayerBasic : MonoBehaviour {
         if(Input.GetKeyDown(changeIntoSoul) && roleInfo.roleState !=RoleState.Soul)
         {
             GetIntoSoul();
+        }
+
+        if(IsGrounded())
+        {
+            this.isJump = false;
+            this.jumpTime = this.roleInfo.jumpTime;
         }
 
         /*
@@ -249,6 +257,7 @@ public class PlayerBasic : MonoBehaviour {
         GameObject statue = Instantiate((GameObject)Resources.Load("Prefabs/Statue"));
         statue.GetComponent<GS_Statue>().statueInit(this.roleState);
         statue.transform.position = this.transform.position ;
+        statue.transform.parent = GameObject.Find("Statues").transform;
 
         //切换状态       
         GameObject player = Instantiate((GameObject)Resources.Load("Prefabs/" + this.gameObject.name));
@@ -271,7 +280,8 @@ public class PlayerBasic : MonoBehaviour {
     {
         body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Other, false, false, false);
 
-        yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count);
+        //yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count); 
+        yield return new WaitForSeconds(1.0f);
         
         this.roleInfo = roleInfos[this.roleState];
         Destroy(statue);
@@ -338,6 +348,15 @@ public class PlayerBasic : MonoBehaviour {
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
                 this.GetComponent<BoxCollider>().size = new Vector3(this.roleInfo.roleSize.x, this.roleInfo.roleSize.y, 0.1f);
                 break;
+            case RoleState.Tortoise:
+                //this.GetComponent<Rigidbody2D>().gravityScale = 1;
+                //this.gameObject.GetComponent<Rigidbody2D>().mass = this.roleInfo.roleMass;
+                //this.gameObject.AddComponent<BoxCollider2D>();
+                //this.GetComponent<BoxCollider2D>().size = this.roleInfo.roleSize;
+                this.GetComponent<Rigidbody>().useGravity = true;
+                this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
+                this.GetComponent<BoxCollider>().size = new Vector3(this.roleInfo.roleSize.x, this.roleInfo.roleSize.y, 0.1f);
+                break;
             case RoleState.Soul:
                 this.GetComponent<Rigidbody>().useGravity = false;
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
@@ -395,7 +414,6 @@ public class PlayerBasic : MonoBehaviour {
 
         if(Physics.Raycast(position, direction, distance))
         {
-            this.isJump = false;
             return true;
         }
 

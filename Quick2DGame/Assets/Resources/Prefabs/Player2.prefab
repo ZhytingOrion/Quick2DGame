@@ -117,7 +117,7 @@ MonoBehaviour:
   downKey: 107
   jumpKey: 117
   changeIntoSoul: 107
-  roleState: 3
+  roleState: 4
   roleInfo:
     roleState: 3
     roleTex: {fileID: 21300000, guid: 44b4525e462e65f4fb0ae944d5b2319d, type: 3}
