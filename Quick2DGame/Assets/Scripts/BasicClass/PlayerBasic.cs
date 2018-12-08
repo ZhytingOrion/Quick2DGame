@@ -74,6 +74,7 @@ public class PlayerBasic : MonoBehaviour {
         //禁止旋转
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
+
         //键盘
         /*if(Input.GetKeyDown(KeyCode.W))
         {
@@ -85,18 +86,23 @@ public class PlayerBasic : MonoBehaviour {
         }*/
         if (Input.GetKey(leftKey))
         {
-            this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
             body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleState)
             {
                 case RoleState.Robbit:
-                    if (!this.isJump)
+                    if (IsGrounded() && !this.isJump)
                     {
+                        this.transform.position += new Vector3(0, 0.02f, 0);
                         this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
                         this.isJump = true;
                     }
+                    else
+                    {
+                        this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+                    }
                     break;
                 default:
+                    this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
                     break;
             }
             if (!this.isLeft)
@@ -107,18 +113,23 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(rightKey))
         {
-            this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
             body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleState)
             {
                 case RoleState.Robbit:
-                    if (!this.isJump)
+                    if (IsGrounded())
                     {
+                        this.transform.position += new Vector3(0, 0.02f, 0);
                         this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce, 0));
                         this.isJump = true;
                     }
+                    else
+                    {
+                        this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+                    }
                     break;
                 default:
+                    this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
                     break;
             }
             if (this.isLeft)
@@ -153,7 +164,7 @@ public class PlayerBasic : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(jumpKey) && !isJump)
+        if (Input.GetKeyDown(jumpKey) && IsGrounded() && !isJump)
         {
             body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Jump, false, false, false);
             switch (this.roleInfo.roleState)
@@ -162,6 +173,7 @@ public class PlayerBasic : MonoBehaviour {
                     break;
                 default:
                     //this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, roleInfo.jumpForce));
+                    this.transform.position += new Vector3(0, 0.1f, 0);
                     this.GetComponent<Rigidbody>().AddForce(new Vector3(0, roleInfo.jumpForce,0));
                     jumpTime -= 1;
                     if (jumpTime == 0) isJump = true;
@@ -371,9 +383,23 @@ public class PlayerBasic : MonoBehaviour {
         Debug.Log("进入碰撞体!");
         //if(collision.gameObject.tag == "floor")
         {
-            isJump = false;
-            jumpTime = this.roleInfo.jumpTime;
+          
         }
+    }
+
+    private bool IsGrounded()
+    {
+        Vector3 position = transform.position;
+        Vector3 direction = Vector3.down;
+        float distance = this.GetComponent<BoxCollider>().size.y * 0.52f;
+
+        if(Physics.Raycast(position, direction, distance))
+        {
+            this.isJump = false;
+            return true;
+        }
+
+        return false;
     }
 }
 

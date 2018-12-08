@@ -1482,8 +1482,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1240985522}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.14, y: -3.6, z: -2.33}
-  m_LocalScale: {x: 11.233578, y: 0.09207, z: 1}
+  m_LocalPosition: {x: 0.02, y: -3.2898, z: -2.33}
+  m_LocalScale: {x: 7.301825, y: 0.14155768, z: 1}
   m_Children: []
   m_Father: {fileID: 1281115541}
   m_RootOrder: 6
@@ -1565,6 +1565,7 @@ Transform:
   - {fileID: 2130763373}
   - {fileID: 1508548940}
   - {fileID: 1890261914}
+  - {fileID: 1806469104}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1785,11 +1786,11 @@ MonoBehaviour:
   - roleState: 2
     roleTex: {fileID: 21300000, guid: 30ecd714abbdde64bbf307bc9a7d3fbd, type: 3}
     roleSize: {x: 1.1, y: 0.75}
-    moveSpeedX: 4
+    moveSpeedX: 2
     moveSpeedY: 0
-    jumpForce: 600
+    jumpForce: 1000
     jumpTime: 1
-    roleMass: 3
+    roleMass: 4
     isLeft: 0
     walkAnimInfo:
       formatAssetPath: 
@@ -1812,7 +1813,7 @@ MonoBehaviour:
     stayAnim: []
     otherAnim: []
   - roleState: 3
-    roleTex: {fileID: 21300000, guid: 44b4525e462e65f4fb0ae944d5b2319d, type: 3}
+    roleTex: {fileID: 21300000, guid: cd2de96de3ff92b49843d1b23d386f74, type: 3}
     roleSize: {x: 0.3, y: 0.5}
     moveSpeedX: 0.5
     moveSpeedY: 1
@@ -1831,7 +1832,7 @@ MonoBehaviour:
     stayAnimInfo:
       formatAssetPath: Arts/Anim/SoulStay/Comp 4_
       minName: 66
-      maxName: 119
+      maxName: 138
     otherAnimInfo:
       formatAssetPath: Arts/Anim/SoulWalk/Comp 4_
       minName: 10
@@ -1863,7 +1864,7 @@ MonoBehaviour:
   statueInfos:
   - statueState: 0
     statueTex: {fileID: 21300000, guid: ec8753dd1911bc6449363b827fe120aa, type: 3}
-    statueSize: {x: 0.2, y: 0.2}
+    statueSize: {x: 0.34, y: 0.35}
     statueMass: 0
   - statueState: 1
     statueTex: {fileID: 21300000, guid: 7b5762a4288b7fb46969d6eb4582477a, type: 3}
@@ -2078,7 +2079,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573955648}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.811, y: -1.55, z: -2.33}
+  m_LocalPosition: {x: -2.811, y: -1.48, z: -2.33}
   m_LocalScale: {x: 1.559017, y: 0.34687915, z: 1.1524265}
   m_Children: []
   m_Father: {fileID: 1281115541}
@@ -2423,21 +2424,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1331312475032350, guid: 549ebcb6219080b42adabca201937e1f,
     type: 2}
   m_PrefabInternal: {fileID: 418000370}
---- !u!54 &1757416346
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1757416345}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1757416347
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2455,21 +2441,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1331312475032350, guid: 549ebcb6219080b42adabca201937e1f,
     type: 2}
   m_PrefabInternal: {fileID: 698672158}
---- !u!54 &1774694259
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1774694258}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1774694260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2482,6 +2453,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.8, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1806469103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1806469104}
+  - component: {fileID: 1806469105}
+  m_Layer: 0
+  m_Name: barrier (10)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1806469104
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806469103}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.46, y: 2.68, z: -2.33}
+  m_LocalScale: {x: 0.9300528, y: 0.034687757, z: 1.1524299}
+  m_Children: []
+  m_Father: {fileID: 1281115541}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1806469105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806469103}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9198637, y: 6.2262955, z: 6}
+  m_Center: {x: 0.05332899, y: 0.39997292, z: 0}
 --- !u!1 &1840368923
 GameObject:
   m_ObjectHideFlags: 0
@@ -2794,7 +2806,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4371586429797696, guid: ff8a91c3c388a70498887a76065917da, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4371586429797696, guid: ff8a91c3c388a70498887a76065917da, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2898,21 +2910,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1331312475032350, guid: 549ebcb6219080b42adabca201937e1f,
     type: 2}
   m_PrefabInternal: {fileID: 816273887}
---- !u!54 &2099401263
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2099401262}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &2099401264
 BoxCollider:
   m_ObjectHideFlags: 0

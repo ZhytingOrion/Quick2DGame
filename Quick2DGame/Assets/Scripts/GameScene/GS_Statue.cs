@@ -9,6 +9,8 @@ public class GS_Statue : MonoBehaviour {
     public RoleState statueState;
 
     private Vector3 pos;
+    private float acc = -Consts.Instance.Gravity;
+    private float V0;
 
     // Use this for initialization
     void Start () {
@@ -29,7 +31,12 @@ public class GS_Statue : MonoBehaviour {
         currentPos.x = pos.x;
         currentPos.z = pos.z;
         this.transform.position = currentPos;
-	}
+
+        if (!IsGrounded())
+        {
+            this.transform.Translate(new Vector3(0, 0.5f * acc * Time.deltaTime,0));
+        }
+    }
 
     public void statueInit(RoleState state)
     {
@@ -50,4 +57,17 @@ public class GS_Statue : MonoBehaviour {
         }
     }
 
+    private bool IsGrounded()
+    {
+        Vector3 position = transform.position;
+        Vector3 direction = Vector3.down;
+        float distance = this.GetComponent<BoxCollider>().size.y / 2;
+
+        if (Physics.Raycast(position, direction, distance))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
