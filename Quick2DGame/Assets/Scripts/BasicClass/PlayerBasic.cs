@@ -55,19 +55,16 @@ public class PlayerBasic : MonoBehaviour {
         this.isLeft = this.roleInfo.isLeft;
         body = this.transform.Find("body").gameObject;
         body.GetComponent<SpriteRenderer>().sprite = this.roleInfo.roleTex;
-        addColliderComponent();
+        deleteAllCollider();
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (Game.Instance.gameState != GameState.Play) return;
 
-        if (this.roleState == RoleState.Soul)
+        if (this.GetComponent<Collider>()== null)
         {
-            //if(this.GetComponent<BoxCollider2D>() != null)
-            //   this.GetComponent<BoxCollider2D>().isTrigger = true;
-            if (this.GetComponent<BoxCollider>() != null)
-                this.GetComponent<BoxCollider>().isTrigger = true;
+            addColliderComponent();
         }
 
         //禁止旋转
@@ -235,7 +232,7 @@ public class PlayerBasic : MonoBehaviour {
         //切换状态       
         GameObject player = Instantiate((GameObject)Resources.Load("Prefabs/" + this.gameObject.name));
         player.name = this.gameObject.name;
-        player.transform.position = this.transform.position + new Vector3(0, this.roleInfo.roleSize.y * 1.5f, 0);
+        player.transform.position = this.transform.position + new Vector3(0, this.roleInfo.roleSize.y + 0.5f, 0);
         Destroy(this.gameObject);
         //this.roleState = RoleState.Soul;
         //this.roleInfo = roleInfos[RoleState.Soul];
@@ -255,13 +252,11 @@ public class PlayerBasic : MonoBehaviour {
 
         //切换状态
         this.roleInfo = roleInfos[newRolestate];
-        addColliderComponent();
+        deleteAllCollider();
     }
 
     private void addColliderComponent()   //根据角色添加对应碰撞体
     {
-        deleteAllCollider();
-
         Debug.Log("进入加刚体" + this.roleState );
 
         //if (this.GetComponent<Rigidbody2D>() == null)
@@ -281,6 +276,11 @@ public class PlayerBasic : MonoBehaviour {
             Debug.Log("有刚体" + this.roleState + Time.time);
         }
 
+        if(this.gameObject.GetComponent<BoxCollider>() == null)
+        {
+            this.gameObject.AddComponent<BoxCollider>();
+        }
+
         switch (this.roleState)
         {
             case RoleState.Mouse:
@@ -290,8 +290,7 @@ public class PlayerBasic : MonoBehaviour {
                 //this.GetComponent<BoxCollider2D>().size = this.roleInfo.roleSize;
                 this.GetComponent<Rigidbody>().useGravity = true;
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
-                this.gameObject.AddComponent<BoxCollider>();
-                this.GetComponent<BoxCollider>().size = this.roleInfo.roleSize;
+                this.GetComponent<BoxCollider>().size = new Vector3(this.roleInfo.roleSize.x, this.roleInfo.roleSize.y, 0.1f);
                 break;
             case RoleState.Robbit:
                 //this.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -300,8 +299,7 @@ public class PlayerBasic : MonoBehaviour {
                 //this.GetComponent<BoxCollider2D>().size = this.roleInfo.roleSize;
                 this.GetComponent<Rigidbody>().useGravity = true;
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
-                this.gameObject.AddComponent<BoxCollider>();
-                this.GetComponent<BoxCollider>().size = this.roleInfo.roleSize;
+                this.GetComponent<BoxCollider>().size = new Vector3(this.roleInfo.roleSize.x, this.roleInfo.roleSize.y, 0.1f);
                 break;
             case RoleState.Dog:
                 //this.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -310,13 +308,11 @@ public class PlayerBasic : MonoBehaviour {
                 //this.GetComponent<BoxCollider2D>().size = this.roleInfo.roleSize;
                 this.GetComponent<Rigidbody>().useGravity = true;
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
-                this.gameObject.AddComponent<BoxCollider>();
-                this.GetComponent<BoxCollider>().size = this.roleInfo.roleSize;
+                this.GetComponent<BoxCollider>().size = new Vector3(this.roleInfo.roleSize.x, this.roleInfo.roleSize.y, 0.1f);
                 break;
             case RoleState.Soul:
                 this.GetComponent<Rigidbody>().useGravity = false;
                 this.gameObject.GetComponent<Rigidbody>().mass = this.roleInfo.roleMass;
-                this.gameObject.AddComponent<BoxCollider>();
                 this.GetComponent<BoxCollider>().isTrigger = true;
                 //Destroy(this.GetComponent<Rigidbody2D>());
                 //this.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -364,3 +360,5 @@ public class PlayerBasic : MonoBehaviour {
         }
     }
 }
+
+

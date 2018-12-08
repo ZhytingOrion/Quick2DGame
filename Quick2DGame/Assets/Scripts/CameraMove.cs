@@ -27,11 +27,12 @@ public class CameraMove : MonoBehaviour {
         if (player2 == null) player2 = GameObject.Find("Player2");
         this.betweenX = (player1.transform.position.x + player2.transform.position.x) / 2;
         if (Mathf.Abs(this.transform.position.x - this.betweenX) >= maxSpaceX) this.transform.position += new Vector3((this.betweenX - this.transform.position.x)*speedXRatio * Time.deltaTime, 0, 0);
-        float farX = Mathf.Abs(player1.transform.position.x - player2.transform.position.x);
-        if (farX >= maxPlayerSpace)
+        float farX = Mathf.Max(Mathf.Abs(player1.transform.position.x - this.transform.position.x), Mathf.Abs(player2.transform.position.x - this.transform.position.x));
+        if (farX >= maxPlayerSpace / 2)
         {
-            this.GetComponent<Camera>().orthographicSize = farX / 3f;
-            this.transform.position = new Vector3(this.betweenX, this.transform.position.y, this.transform.position.z);
+            this.GetComponent<Camera>().orthographicSize = farX / 1.5f;
+            //this.transform.position = new Vector3(this.betweenX, this.transform.position.y, this.transform.position.z);
+            this.transform.position += new Vector3((this.betweenX - this.transform.position.x)*speedXRatio * Time.deltaTime, 0, 0);
         }
         else
         {

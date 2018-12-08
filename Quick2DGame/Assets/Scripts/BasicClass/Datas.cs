@@ -28,6 +28,16 @@ public class StatueInfo
     public float statueMass;
 }
 
+[System.Serializable]
+public enum AnimState
+{
+    Stop,
+    Walk,
+    Stay,
+    Jump,
+    Other,
+}
+
 public class Datas{
 
 }
