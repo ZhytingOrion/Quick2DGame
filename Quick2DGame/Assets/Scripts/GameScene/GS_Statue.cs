@@ -76,7 +76,7 @@ public class GS_Statue : MonoBehaviour {
         if (this.GetComponent<BoxCollider>() == null) return false;
         float distance = this.GetComponent<BoxCollider>().size.y / 2;
 
-        if (Physics.Raycast(position, direction, distance))
+        if (Physics.Raycast(position, direction, distance, -1, QueryTriggerInteraction.Ignore ))
         {
             return true;
         }

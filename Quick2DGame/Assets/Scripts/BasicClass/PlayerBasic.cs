@@ -418,7 +418,7 @@ public class PlayerBasic : MonoBehaviour {
         {
             Debug.Log("找到雕塑了!");
             //让灵体激活该雕像
-            if (Mathf.Abs(this.gameObject.transform.position.x - collision.gameObject.transform.position.x) < 0.01f  && Mathf.Abs(this.gameObject.transform.position.y - collision.gameObject.transform.position.y) < 0.01f)
+            if (Mathf.Abs(this.gameObject.transform.position.x - collision.gameObject.transform.position.x) < 0.1f  && Mathf.Abs(this.gameObject.transform.position.y - collision.gameObject.transform.position.y) < 0.1f)
             {
                 Debug.Log("距离：" + Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position));
                 this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);

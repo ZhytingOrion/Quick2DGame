@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1901774847025366}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1901774847025366
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4755302333518624}
   - component: {fileID: 114758996012518108}
@@ -30,7 +30,7 @@ GameObject:
 --- !u!4 &4755302333518624
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1901774847025366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -43,7 +43,7 @@ Transform:
 --- !u!114 &114758996012518108
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1901774847025366}
   m_Enabled: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   roleInfos:
   - roleState: 0
     roleTex: {fileID: 21300000, guid: 3da168b5ae129494bb1ad5d40d384976, type: 3}
-    roleSize: {x: 0.34, y: 0.4}
+    roleSize: {x: 0.87, y: 0.87}
     moveSpeedX: 1.8
     moveSpeedY: 0
     jumpForce: 200
@@ -151,7 +151,7 @@ MonoBehaviour:
     otherAnim: []
   - roleState: 2
     roleTex: {fileID: 21300000, guid: 4b73a96526b6c53479808ba8aed2b37f, type: 3}
-    roleSize: {x: 1.1, y: 0.75}
+    roleSize: {x: 1.74, y: 1.77}
     moveSpeedX: 2.4
     moveSpeedY: 0
     jumpForce: 1200
@@ -345,8 +345,8 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 622791ce9a7370143bfcdec9d3303e21, type: 3}
     - {fileID: 21300000, guid: 2ff78d1c090981e47b8e6d5779b18204, type: 3}
   - roleState: 3
-    roleTex: {fileID: 21300000, guid: a4372ddb9e7ba9b41bc779f55338ea5f, type: 3}
-    roleSize: {x: 0.3, y: 0.5}
+    roleTex: {fileID: 21300000, guid: 605c3075467871049a98fc4d3f2ca3c4, type: 3}
+    roleSize: {x: 1.31, y: 0.87}
     moveSpeedX: 1.2
     moveSpeedY: 0
     jumpForce: 300
@@ -493,18 +493,18 @@ MonoBehaviour:
     - {fileID: 0}
   statueInfos:
   - statueState: 0
-    statueTex: {fileID: 21300000, guid: ec8753dd1911bc6449363b827fe120aa, type: 3}
-    statueSize: {x: 0.34, y: 0.35}
+    statueTex: {fileID: 21300000, guid: 5eefe45e66af39646beaf607be8e4500, type: 3}
+    statueSize: {x: 0.87, y: 0.87}
     statueMass: 0
   - statueState: 1
-    statueTex: {fileID: 21300000, guid: 7b5762a4288b7fb46969d6eb4582477a, type: 3}
+    statueTex: {fileID: 21300000, guid: ca20d97b444050041b5009e90f370533, type: 3}
     statueSize: {x: 0.87, y: 1.77}
     statueMass: 0
   - statueState: 2
-    statueTex: {fileID: 21300000, guid: 54b171a2c34586d479413472e106ac07, type: 3}
-    statueSize: {x: 0.9, y: 0.8}
+    statueTex: {fileID: 21300000, guid: 66c5d25aa9a00fa4ca0f6c26ea4928a2, type: 3}
+    statueSize: {x: 1.74, y: 1.77}
     statueMass: 0
   - statueState: 3
-    statueTex: {fileID: 21300000, guid: 87575dc173317a74e89ff5fda1e20e24, type: 3}
-    statueSize: {x: 0.9, y: 0.8}
+    statueTex: {fileID: 21300000, guid: a1a05aead324dab449688712dd42f8cf, type: 3}
+    statueSize: {x: 1.31, y: 0.87}
     statueMass: 0

@@ -34,7 +34,11 @@ public class GS_BrokenThing : MonoBehaviour {
             if (Mathf.Abs(other.transform.position.y - this.transform.position.y) <= this.MaxDistance)
             isBroken = true;
             this.GetComponent<SpriteRenderer>().sprite = brokenTex;
+	
+            while(this.GetComponent<BoxCollider>()!=null)
+	{
             Destroy(this.GetComponent<BoxCollider>());
+	}
         }
     }
 }
