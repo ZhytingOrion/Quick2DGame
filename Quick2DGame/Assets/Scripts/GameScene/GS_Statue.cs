@@ -35,7 +35,14 @@ public class GS_Statue : MonoBehaviour {
         {
             this.transform.Translate(new Vector3(0, 0.5f * acc * Time.deltaTime,0));
         }*/
-        
+        if (IsGrounded())
+        {
+            if (this.GetComponent<Rigidbody>() != null)
+            {
+                Destroy(this.GetComponent<Rigidbody>());
+            }
+        }
+
     }
 
     public void statueInit(RoleState state)
@@ -58,13 +65,7 @@ public class GS_Statue : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (IsGrounded())
-        {
-            if (this.GetComponent<Rigidbody>() != null)
-            {
-                Destroy(this.GetComponent<Rigidbody>());
-            }
-        }
+        
     }
 
     private bool IsGrounded()

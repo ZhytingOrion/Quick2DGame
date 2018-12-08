@@ -36,7 +36,7 @@ public class GS_GameInit : MonoBehaviour {
     private List<Sprite> getSpriteAnim(spriteAnimInfo info)
     {
         List<Sprite> sprites = new List<Sprite>();
-        if (info.formatAssetPath == "" || info.minName >= info.maxName) return sprites;
+        if (info.formatAssetPath == "" || info.minName > info.maxName) return sprites;
         string assetName = info.formatAssetPath;
         for(int i = info.minName; i<=info.maxName;++i)
         {

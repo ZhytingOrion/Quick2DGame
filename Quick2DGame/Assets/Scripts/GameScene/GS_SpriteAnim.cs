@@ -77,7 +77,6 @@ public class GS_SpriteAnim : MonoBehaviour {
             gameObject.SetActive(true);
             while (true)
             {
-                //当我们需要在整个动画播放完之后  重复播放后面的部分 就可以展现我们纯代码播放的自由性
                 if (index > animationSprites.Count - 1)
                 {
                     if (!isLoop || nextState != AnimState.Stop)
@@ -103,7 +102,7 @@ public class GS_SpriteAnim : MonoBehaviour {
             }
             if (nextState != AnimState.Stop)
             {
-                nowAnimCoroutine = StartCoroutine(PlayAnimationForwardIEnum(getListSprite(nextState), isBack, isFlip, isLoop));
+                nowAnimCoroutine = StartCoroutine(PlayAnimationForwardIEnum(getListSprite(nextState), isBack, isFlip, false));
             }
         }
         else
