@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public enum RoleState
 {
     Mouse,
@@ -28,7 +29,7 @@ public class PlayerBasic : MonoBehaviour {
     public RoleInfo roleInfo = new RoleInfo();
 
     private bool isJump = false;
-    private bool isLeft;
+    public bool isLeft;
     private int jumpTime;
     private GameObject gameInit;
     private Dictionary<RoleState, RoleInfo> roleInfos = new Dictionary<RoleState, RoleInfo>();
@@ -38,6 +39,8 @@ public class PlayerBasic : MonoBehaviour {
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
+        gameInit = GameObject.Find("_Init");
+        roleInfos = gameInit.GetComponent<GS_GameInit>().roleInfosDic;
 
         // Position used for the cube.
         //position = new Vector3(0.0f, 0.0f, 0.0f);
@@ -48,13 +51,14 @@ public class PlayerBasic : MonoBehaviour {
         jumpTime = roleInfo.jumpTime;
         //this.GetComponent<BoxCollider2D>().size = roleInfo.roleSize;
         this.GetComponent<BoxCollider>().size = roleInfo.roleSize;
-        gameInit = GameObject.Find("_Init");
-        roleInfos = gameInit.GetComponent<GS_GameInit>().roleInfosDic;
 
         this.roleInfo = roleInfos[this.roleState];
         this.isLeft = this.roleInfo.isLeft;
         body = this.transform.Find("body").gameObject;
         body.GetComponent<SpriteRenderer>().sprite = this.roleInfo.roleTex;
+        body.GetComponent<GS_SpriteAnim>().animWalkSprites = this.roleInfo.walkAnim;
+        body.GetComponent<GS_SpriteAnim>().animStaySprites = this.roleInfo.stayAnim;
+        body.GetComponent<GS_SpriteAnim>().animJumpSprites = this.roleInfo.jumpAnim;
         deleteAllCollider();
 	}
 	
@@ -82,7 +86,8 @@ public class PlayerBasic : MonoBehaviour {
         if (Input.GetKey(leftKey))
         {
             this.transform.position += new Vector3(-1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
-            switch(this.roleState)
+            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
+            switch (this.roleState)
             {
                 case RoleState.Robbit:
                     if (!this.isJump)
@@ -103,6 +108,7 @@ public class PlayerBasic : MonoBehaviour {
         if (Input.GetKey(rightKey))
         {
             this.transform.position += new Vector3(1, 0, 0) * roleInfo.moveSpeedX * Time.deltaTime;
+            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleState)
             {
                 case RoleState.Robbit:
@@ -124,7 +130,8 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(upKey))
         {
-            switch(this.roleInfo.roleState)
+            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
+            switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
                     this.transform.position += new Vector3(0, 1, 0) * roleInfo.moveSpeedY * Time.deltaTime;
@@ -135,6 +142,7 @@ public class PlayerBasic : MonoBehaviour {
         }
         if (Input.GetKey(downKey))
         {
+            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Walk, false, false, false);
             switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
@@ -147,6 +155,7 @@ public class PlayerBasic : MonoBehaviour {
 
         if (Input.GetKeyDown(jumpKey) && !isJump)
         {
+            body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Jump, false, false, false);
             switch (this.roleInfo.roleState)
             {
                 case RoleState.Soul:
@@ -239,20 +248,27 @@ public class PlayerBasic : MonoBehaviour {
         //addColliderComponent();
     }
 
-    public void GetIntoStatue(RoleState newRolestate)
+    public void GetIntoStatue(RoleState newRolestate, GameObject statue)
     {
         this.roleState = newRolestate;
-
-        //换图
-        this.body.GetComponent<SpriteRenderer>().sprite = roleInfos[newRolestate].roleTex;
-
-        //播动画
-
-        //销毁雕像（可放在雕像碰撞体也可以放在这里）
-
-        //切换状态
-        this.roleInfo = roleInfos[newRolestate];
+        StartCoroutine(ChangeRoleStateAnim(statue));
         deleteAllCollider();
+    }
+
+    private IEnumerator ChangeRoleStateAnim(GameObject statue)
+    {
+        body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Other, false, false, false);
+
+        yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count);
+        
+        this.roleInfo = roleInfos[this.roleState];
+        Destroy(statue);
+
+        GameObject player = Instantiate((GameObject)Resources.Load("Prefabs/" + this.gameObject.name));
+        player.GetComponent<PlayerBasic>().roleState = this.roleState;
+        player.name = this.gameObject.name;
+        player.transform.position = this.transform.position;
+        Destroy(this.gameObject);
     }
 
     private void addColliderComponent()   //根据角色添加对应碰撞体

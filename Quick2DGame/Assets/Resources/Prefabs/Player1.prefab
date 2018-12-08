@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4178505535232728}
   - component: {fileID: 212105638970344442}
+  - component: {fileID: 114152305784237980}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -99,6 +100,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.5, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114152305784237980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1281312905424654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51352eb8e7879944bc4cdcf1ab0e830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 212105638970344442}
+  animWalkSprites: []
+  animStaySprites: []
+  animJumpSprites: []
+  animOtherSprites: []
+  animState: 2
+  nextState: 0
 --- !u!114 &114253716612174576
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,9 +146,27 @@ MonoBehaviour:
     jumpTime: 0
     roleMass: 0
     isLeft: 0
-    runAnim: {fileID: 0}
-    jumpAnim: {fileID: 0}
-    hurtAnim: {fileID: 0}
+    walkAnimInfo:
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
+    jumpAnimInfo:
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
+    stayAnimInfo:
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
+    otherAnimInfo:
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
+    walkAnim: []
+    jumpAnim: []
+    stayAnim: []
+    otherAnim: []
+  isLeft: 0
 --- !u!212 &212105638970344442
 SpriteRenderer:
   m_ObjectHideFlags: 1

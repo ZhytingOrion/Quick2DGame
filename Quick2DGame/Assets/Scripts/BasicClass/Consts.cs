@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Consts {
 
-    private Consts _instance;
-    public Consts Instance
+    private static Consts _instance;
+    public static Consts Instance
     {
         get
         {
@@ -18,4 +18,5 @@ public class Consts {
     }
 
     public float Gravity = 9.8f;
+    public float FrameSpeed = 0.04f;
 }

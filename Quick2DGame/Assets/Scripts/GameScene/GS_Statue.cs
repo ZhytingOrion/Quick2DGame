@@ -19,6 +19,8 @@ public class GS_Statue : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (Game.Instance.gameState != GameState.Play) return;
+
         //禁止旋转
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
 
@@ -44,12 +46,7 @@ public class GS_Statue : MonoBehaviour {
         {
             Debug.Log("找到雕塑了!");
             //让灵体激活该雕像
-            collision.gameObject.GetComponent<PlayerBasic>().GetIntoStatue(this.statueState);
-
-            //如果有动画：加动画不要虚（幽灵动画加幽灵身上）
-
-            //销毁雕像
-            Destroy(this.gameObject);
+            collision.gameObject.GetComponent<PlayerBasic>().GetIntoStatue(this.statueState, this.gameObject);
         }
     }
 

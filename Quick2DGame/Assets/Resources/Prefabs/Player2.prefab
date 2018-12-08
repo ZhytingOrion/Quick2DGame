@@ -38,6 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4870441919779746}
   - component: {fileID: 212995362830550978}
+  - component: {fileID: 114993842498206096}
   m_Layer: 0
   m_Name: body
   m_TagString: Untagged
@@ -127,9 +128,24 @@ MonoBehaviour:
     jumpTime: 0
     roleMass: 0
     isLeft: 0
-    runAnim: {fileID: 0}
-    jumpAnim: {fileID: 0}
-    hurtAnim: {fileID: 0}
+    walkAnim: []
+    jumpAnim: []
+    stayAnim: []
+--- !u!114 &114993842498206096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1725483666377988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f51352eb8e7879944bc4cdcf1ab0e830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  animWalkSprites: []
+  animStaySprites: []
+  animJumpSprites: []
 --- !u!212 &212995362830550978
 SpriteRenderer:
   m_ObjectHideFlags: 1

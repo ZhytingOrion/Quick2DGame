@@ -14,9 +14,22 @@ public class RoleInfo
     public int jumpTime;
     public float roleMass;
     public bool isLeft;
-    public Animation runAnim;
-    public Animation jumpAnim;
-    public Animation hurtAnim;
+    public spriteAnimInfo walkAnimInfo;
+    public spriteAnimInfo jumpAnimInfo;
+    public spriteAnimInfo stayAnimInfo;
+    public spriteAnimInfo otherAnimInfo;
+    public List<Sprite> walkAnim = new List<Sprite>();
+    public List<Sprite> jumpAnim = new List<Sprite>();
+    public List<Sprite> stayAnim = new List<Sprite>();
+    public List<Sprite> otherAnim = new List<Sprite>();
+}
+
+[System.Serializable]
+public class spriteAnimInfo
+{
+    public string formatAssetPath;
+    public int minName;
+    public int maxName;
 }
 
 [System.Serializable]
