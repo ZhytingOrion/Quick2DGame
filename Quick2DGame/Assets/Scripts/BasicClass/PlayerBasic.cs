@@ -60,6 +60,7 @@ public class PlayerBasic : MonoBehaviour {
         body.GetComponent<GS_SpriteAnim>().animWalkSprites = this.roleInfo.walkAnim;
         body.GetComponent<GS_SpriteAnim>().animStaySprites = this.roleInfo.stayAnim;
         body.GetComponent<GS_SpriteAnim>().animJumpSprites = this.roleInfo.jumpAnim;
+        body.GetComponent<GS_SpriteAnim>().animOtherSprites = this.roleInfo.otherAnim;
         deleteAllCollider();
 	}
 	
@@ -280,8 +281,8 @@ public class PlayerBasic : MonoBehaviour {
     {
         body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Other, false, false, false);
 
-        //yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count); 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count); 
+        //yield return new WaitForSeconds(1.0f);
         
         this.roleInfo = roleInfos[this.roleState];
         Destroy(statue);
@@ -406,6 +407,20 @@ public class PlayerBasic : MonoBehaviour {
         }
     }
 
+
+    private void OnTriggerStay(Collider collision)
+    {
+        if (collision.gameObject.tag == "statue")
+        {
+            Debug.Log("找到雕塑了!");
+            //让灵体激活该雕像
+            if (Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position) < 0.2f)
+            {
+                this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
+                Destroy(collision.GetComponent<Collider>());
+            }
+        }
+    }
     private bool IsGrounded()
     {
         Vector3 position = transform.position;
