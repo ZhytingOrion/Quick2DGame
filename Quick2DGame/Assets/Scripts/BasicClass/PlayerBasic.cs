@@ -421,8 +421,8 @@ public class PlayerBasic : MonoBehaviour {
             if (Mathf.Abs(this.gameObject.transform.position.x - collision.gameObject.transform.position.x) < 0.3f  && Mathf.Abs(this.gameObject.transform.position.y - collision.gameObject.transform.position.y) < 0.3f)
             {
                 Debug.Log("距离：" + Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position));
-                this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
-                Destroy(collision.GetComponent<Collider>());
+                if(collision.gameObject.GetComponent<GS_Statue>().player == null) this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
+                collision.gameObject.GetComponent<GS_Statue>().player = this.gameObject;
             }
         }
     }

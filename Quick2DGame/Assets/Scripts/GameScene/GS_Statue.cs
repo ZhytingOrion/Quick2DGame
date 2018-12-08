@@ -14,6 +14,7 @@ public class GS_Statue : MonoBehaviour {
     public AudioClip clipImpact;
     private float height;
     private bool isOnGround = false;
+    public GameObject player = null;
 
     // Use this for initialization
     void Start () {
