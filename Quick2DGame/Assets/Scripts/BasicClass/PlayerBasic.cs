@@ -36,13 +36,18 @@ public class PlayerBasic : MonoBehaviour {
     private Dictionary<RoleState, RoleInfo> roleInfos = new Dictionary<RoleState, RoleInfo>();
     private GameObject body;
 
+    [Header("音效")]
+    private AudioSource audioSource;
+    public AudioClip clipPossess;
+    public AudioClip clipUnposses;
+
     void Awake()
     {
         width = (float)Screen.width / 2.0f;
         height = (float)Screen.height / 2.0f;
         gameInit = GameObject.Find("_Init");
         roleInfos = gameInit.GetComponent<GS_GameInit>().roleInfosDic;
-
+        audioSource = this.GetComponent<AudioSource>();
         // Position used for the cube.
         //position = new Vector3(0.0f, 0.0f, 0.0f);
     }
@@ -252,7 +257,10 @@ public class PlayerBasic : MonoBehaviour {
         this.body.GetComponent<SpriteRenderer>().sprite = roleInfos[RoleState.Soul].roleTex;
         this.isLeft = roleInfos[RoleState.Soul].isLeft;
 
-        //播动画
+        //播音效
+        this.audioSource.clip = this.clipUnposses;
+        if (this.audioSource.isPlaying) this.audioSource.Stop();
+        this.audioSource.Play();
 
         //丢雕像
         GameObject statue = Instantiate((GameObject)Resources.Load("Prefabs/Statue"));
@@ -281,9 +289,14 @@ public class PlayerBasic : MonoBehaviour {
     {
         body.GetComponent<GS_SpriteAnim>().PlayAnimation(AnimState.Other, false, false, false);
 
-        yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count); 
+        yield return new WaitForSeconds(Consts.Instance.FrameSpeed * roleInfos[RoleState.Soul].otherAnim.Count);
         //yield return new WaitForSeconds(1.0f);
         
+        //播音效
+        this.audioSource.clip = this.clipPossess;
+        if (this.audioSource.isPlaying) this.audioSource.Stop();
+        this.audioSource.Play();
+
         this.roleInfo = roleInfos[this.roleState];
         Destroy(statue);
 
@@ -398,15 +411,6 @@ public class PlayerBasic : MonoBehaviour {
     //    }
     //}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("进入碰撞体!");
-        //if(collision.gameObject.tag == "floor")
-        {
-          
-        }
-    }
-
 
     private void OnTriggerStay(Collider collision)
     {
@@ -414,8 +418,9 @@ public class PlayerBasic : MonoBehaviour {
         {
             Debug.Log("找到雕塑了!");
             //让灵体激活该雕像
-            if (Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position) < 0.2f)
+            if (Mathf.Abs(this.gameObject.transform.position.x - collision.gameObject.transform.position.x) < 0.01f  && Mathf.Abs(this.gameObject.transform.position.y - collision.gameObject.transform.position.y) < 0.01f)
             {
+                Debug.Log("距离：" + Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position));
                 this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
                 Destroy(collision.GetComponent<Collider>());
             }

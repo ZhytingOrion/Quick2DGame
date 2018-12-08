@@ -10,11 +10,16 @@ public class GS_Statue : MonoBehaviour {
 
     private Vector3 pos;
     private float acc = -Consts.Instance.Gravity;
+    private AudioSource audioSource;
+    public AudioClip clipImpact;
+    private float height;
 
     // Use this for initialization
     void Start () {
         statueInit(this.statueState);
         pos = this.transform.position;
+        this.audioSource = this.GetComponent<AudioSource>();
+        height = this.transform.position.y;
     }
 	
 	// Update is called once per frame
@@ -53,25 +58,22 @@ public class GS_Statue : MonoBehaviour {
         this.GetComponent<BoxCollider>().size = new Vector3(statueInfo.statueSize.x, statueInfo.statueSize.y, 3f);
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "player")
-        {
-            Debug.Log("找到雕塑了!");
-            //让灵体激活该雕像
-            collision.gameObject.GetComponent<PlayerBasic>().GetIntoStatue(this.statueState, this.gameObject);
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if(IsGrounded() && Game.Instance.gameState == GameState.Play && height-this.transform.position.y >1.0f)
+        {
+            //播音效
+            this.audioSource.clip = this.clipImpact;
+            if (this.audioSource.isPlaying) this.audioSource.Stop();
+            this.audioSource.Play();
+        }
     }
 
     private bool IsGrounded()
     {
         Vector3 position = transform.position;
         Vector3 direction = Vector3.down;
+        if (this.GetComponent<BoxCollider>() == null) return false;
         float distance = this.GetComponent<BoxCollider>().size.y / 2;
 
         if (Physics.Raycast(position, direction, distance))

@@ -18,5 +18,5 @@ public class Consts {
     }
 
     public float Gravity = 9.8f;
-    public float FrameSpeed = 0.04f;
+    public float FrameSpeed = 0.083f;
 }

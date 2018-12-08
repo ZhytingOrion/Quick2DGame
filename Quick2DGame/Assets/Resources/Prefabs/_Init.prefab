@@ -345,30 +345,30 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 622791ce9a7370143bfcdec9d3303e21, type: 3}
     - {fileID: 21300000, guid: 2ff78d1c090981e47b8e6d5779b18204, type: 3}
   - roleState: 3
-    roleTex: {fileID: 21300000, guid: 87575dc173317a74e89ff5fda1e20e24, type: 3}
+    roleTex: {fileID: 21300000, guid: a4372ddb9e7ba9b41bc779f55338ea5f, type: 3}
     roleSize: {x: 0.3, y: 0.5}
     moveSpeedX: 1.2
     moveSpeedY: 0
     jumpForce: 300
-    jumpTime: 0
+    jumpTime: 1
     roleMass: 1.5
     isLeft: 0
     walkAnimInfo:
-      formatAssetPath: Arts/Anim/SoulWalk/Comp 5_
-      minName: 27
-      maxName: 61
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
     jumpAnimInfo:
       formatAssetPath: 
       minName: 0
       maxName: 0
     stayAnimInfo:
-      formatAssetPath: Arts/Anim/SoulStay/Comp 4_
-      minName: 66
-      maxName: 138
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
     otherAnimInfo:
-      formatAssetPath: Arts/Anim/SoulWalk/Comp 4_
-      minName: 10
-      maxName: 19
+      formatAssetPath: 
+      minName: 0
+      maxName: 0
     walkAnim:
     - {fileID: 21300000, guid: 2d618bb655e3ac64885c759740301b01, type: 3}
     - {fileID: 21300000, guid: 06b0f730f96dc59498a2dc53e028f8ac, type: 3}
@@ -505,6 +505,6 @@ MonoBehaviour:
     statueSize: {x: 0.9, y: 0.8}
     statueMass: 0
   - statueState: 3
-    statueTex: {fileID: 21300000, guid: 54b171a2c34586d479413472e106ac07, type: 3}
+    statueTex: {fileID: 21300000, guid: 87575dc173317a74e89ff5fda1e20e24, type: 3}
     statueSize: {x: 0.9, y: 0.8}
     statueMass: 0

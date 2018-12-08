@@ -3,7 +3,10 @@ guid: d91c3b20f0717844c8845be5d165c443
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - brokenTex: {instanceID: 0}
+  - beforeBrokenTex: {instanceID: 0}
+  - clipSmash: {fileID: 8300000, guid: cd86ea2235b3e4147b2335397b05d111, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
