@@ -18,6 +18,8 @@ public class GS_Balance : MonoBehaviour {
         massLeft = 0;
         massRight = 0;
         dic = GameObject.Find("_Init").GetComponent<GS_GameInit>().roleInfosDic;
+        RightPlane = this.transform.Find("RightPlane").gameObject;
+        LeftPlane = this.transform.Find("LeftPlane").gameObject;
     }
 	
 	// Update is called once per frame

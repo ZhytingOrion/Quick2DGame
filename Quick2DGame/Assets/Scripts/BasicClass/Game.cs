@@ -35,4 +35,14 @@ public class Game{
     {
         get; set;
     }
+
+    public int Role1CandyCount
+    {
+        get; set;
+    }
+
+    public int Role2CandyCount
+    {
+        get; set;
+    }
 }
