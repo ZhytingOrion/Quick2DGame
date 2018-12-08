@@ -28,7 +28,7 @@ public class GS_BrokenThing : MonoBehaviour {
         {
             //播音效
             this.audioSource.clip = this.clipSmash;
-            if (this.audioSource.isPlaying) this.audioSource.Stop();
+            //if (this.audioSource.isPlaying) this.audioSource.Stop();
             this.audioSource.Play();
 
             if (Mathf.Abs(other.transform.position.y - this.transform.position.y) <= this.MaxDistance)

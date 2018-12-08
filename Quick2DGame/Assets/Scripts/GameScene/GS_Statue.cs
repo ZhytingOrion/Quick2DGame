@@ -13,6 +13,7 @@ public class GS_Statue : MonoBehaviour {
     private AudioSource audioSource;
     public AudioClip clipImpact;
     private float height;
+    private bool isOnGround = false;
 
     // Use this for initialization
     void Start () {
@@ -78,6 +79,7 @@ public class GS_Statue : MonoBehaviour {
 
         if (Physics.Raycast(position, direction, distance, -1, QueryTriggerInteraction.Ignore ))
         {
+	this.isOnGround = true;
             return true;
         }
 
