@@ -10,7 +10,6 @@ public class GS_Statue : MonoBehaviour {
 
     private Vector3 pos;
     private float acc = -Consts.Instance.Gravity;
-    private float V0;
 
     // Use this for initialization
     void Start () {
@@ -44,8 +43,7 @@ public class GS_Statue : MonoBehaviour {
         this.statueState = state;
         statueInfo = GameObject.Find("_Init").GetComponent<GS_GameInit>().statueInfosDic[statueState];
         this.transform.Find("statueSprite").GetComponent<SpriteRenderer>().sprite = statueInfo.statueTex;
-        this.GetComponent<BoxCollider>().size = new Vector3(statueInfo.statueSize.x, statueInfo.statueSize.y, 0.2f);
-        //this.GetComponent<Rigidbody2D>().mass = statueInfo.statueMass;
+        this.GetComponent<BoxCollider>().size = new Vector3(statueInfo.statueSize.x, statueInfo.statueSize.y, 3f);
     }
 
     private void OnTriggerEnter(Collider collision)
