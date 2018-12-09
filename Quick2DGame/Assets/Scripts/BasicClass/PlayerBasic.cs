@@ -296,6 +296,7 @@ public class PlayerBasic : MonoBehaviour {
         this.audioSource.clip = this.clipPossess;
         if (this.audioSource.isPlaying) this.audioSource.Stop();
         this.audioSource.Play();
+        Debug.Log("我真的再放音乐");
 
         this.roleInfo = roleInfos[this.roleState];
         Destroy(statue);
@@ -421,8 +422,8 @@ public class PlayerBasic : MonoBehaviour {
             if (Mathf.Abs(this.gameObject.transform.position.x - collision.gameObject.transform.position.x) < 0.3f  && Mathf.Abs(this.gameObject.transform.position.y - collision.gameObject.transform.position.y) < 0.3f)
             {
                 Debug.Log("距离：" + Vector2.Distance(this.gameObject.transform.position, collision.gameObject.transform.position));
-                if(collision.gameObject.GetComponent<GS_Statue>().player == null) this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
-                collision.gameObject.GetComponent<GS_Statue>().player = this.gameObject;
+                this.GetIntoStatue(collision.GetComponent<GS_Statue>().statueState, collision.gameObject);
+                Destroy(collision.GetComponent<Collider>());
             }
         }
     }
