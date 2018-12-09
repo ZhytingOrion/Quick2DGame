@@ -18,6 +18,13 @@ public class GS_PauseButton : MonoBehaviour {
 		
 	}
 
+    public void RecoverGame()
+    {
+        this.GetComponent<SpriteRenderer>().sprite = pauseSprite;
+        isPause = false;
+        Game.Instance.gameState = GameState.Play;
+    }
+
     private void OnMouseDown()
     {
         if(isPause)
@@ -31,6 +38,7 @@ public class GS_PauseButton : MonoBehaviour {
             this.GetComponent<SpriteRenderer>().sprite = playSprite;
             isPause = true;
             Game.Instance.gameState = GameState.Pause;
+            this.transform.Find("PauseScene").gameObject.SetActive(true);
         }
     }
 }
