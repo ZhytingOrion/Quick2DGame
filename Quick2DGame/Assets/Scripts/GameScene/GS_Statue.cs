@@ -66,7 +66,6 @@ public class GS_Statue : MonoBehaviour {
         {
             //播音效
             this.audioSource.clip = this.clipImpact;
-            if (this.audioSource.isPlaying) this.audioSource.Stop();
             this.audioSource.Play();
         }
     }

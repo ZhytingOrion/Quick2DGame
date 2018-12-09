@@ -35,10 +35,11 @@ public class GS_BrokenThing : MonoBehaviour {
             isBroken = true;
             this.GetComponent<SpriteRenderer>().sprite = brokenTex;
 	
-            while(this.GetComponent<BoxCollider>()!=null)
-	{
-            Destroy(this.GetComponent<BoxCollider>());
-	}
+            List<BoxCollider> collider = new List<BoxCollider>(this.GetComponents<BoxCollider>());
+	for(int i = 0; i<collider.Count; ++i)
+{
+	Destroy(collider[i]);
+}
         }
     }
 }
